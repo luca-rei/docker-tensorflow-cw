@@ -6,7 +6,7 @@ RUN rm /etc/apt/sources.list.d/cuda.list
 RUN rm /etc/apt/sources.list.d/nvidia-ml.list
 RUN apt-get update
 #RUN apt-get install -y aptitude vim python3-all python3-pip gfal2 gfal2-plugin-gridftp gfal2-plugin-http  gfal2-plugin-lfc gfal2-plugin-rfio gfal2-plugin-srm libxt-dev
-RUN apt-get install -y aptitude vim gfal2 gfal2-plugin-gridftp gfal2-plugin-http  gfal2-plugin-lfc gfal2-plugin-rfio gfal2-plugin-srm libxt-dev
+RUN apt-get install -y aptitude vim gfal2 gfal2-plugin-gridftp gfal2-plugin-http  gfal2-plugin-lfc gfal2-plugin-rfio gfal2-plugin-srm libxt-dev unzip
 RUN echo 'export LD_LIBRARY_PATH=/usr/local/cuda:/usr/local/cuda-10.0/compat/:$LD_LIBRARY_PATH' >> ~/.bashrc
 
 # cvmfs
