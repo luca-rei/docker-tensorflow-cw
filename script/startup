@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# echo "cvmfs stuff"
+if [[ -z "$(ls -A /cvmfs)" ]];then
+	service autofs start && cvmfs_config probe
+fi
+
+# echo "cron job"
+# cron > /dev/null  2>&1 &
+cron
+
+# spawn real job
+sleep 2
+$@

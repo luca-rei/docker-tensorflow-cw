@@ -1,0 +1,25 @@
+#!/bin/bash
+DONE=0
+PLAIN="/tmp/gridproxy"
+PLAINBCK="/tmp/gridproxynew"
+MYPROXY="/tmp/myproxycred"
+
+# myproxy
+if [[ -e $MYPROXY ]];then
+	source $MYPROXY
+	echo "${MYPROXY_PASS}"|myproxy-logon --proxy_lifetime 48 -d -s ${MYPROXY_SERVER} -S
+	if [[ $? -eq 0 ]];the
+		DONE=1
+	fi
+fi
+
+# noreg voms
+if [[ -e $PLAIN && $DONE -eq 0 ]];then
+	cp $PLAIN ${PLAINBCK}
+	PATHX509=$(env|grep X509|cut -d'=' -f2)
+	X509_USER_PROXY=${PLAINBCK} voms-proxy-init --voms virgo:/virgo/virgo --hours 168 --valid 168:0 --noregen --out ${PLAINBCK}
+	if [[ $? -eq 0 ]];the
+		DONE=1
+	fi
+	mv ${PLAINBCK} ${PATHX509}
+fi
